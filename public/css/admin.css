@@ -2,7 +2,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-color: #fff;
-  color: #222;
+  color: #000;
 }
 
 .navbar-laravel {
@@ -11,19 +11,19 @@ body {
 }
 
 .navbar-brand {
-  color: #222 !important;
+  color: #000 !important;
 }
 
 .nav-link {
-  color: #222 !important;
+  color: #000 !important;
 }
 
 .table-dark {
-  color: #222;
+  color: #000;
 }
 
 .list-group-item {
-  border-color: #222;
+  border-color: #000;
   background-color: #fff;
 }
 
@@ -33,7 +33,6 @@ body {
 
 .login-header {
   background-color: rgba(0, 0, 0, 0);
-  border-bottom:1px solid #fff;
 }
 
 .login-body {

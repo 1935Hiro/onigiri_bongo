@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PasswordController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,10 +13,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+ Route::get('/', function () {
+     return view('home');
+  });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::group(['prefix'=>'admin'],function(){
     Route::get('mypage/create','Admin\MypageController@add')->middleware('auth');
@@ -21,8 +24,9 @@ Route::group(['prefix'=>'admin'],function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/file','FileUpController@index');
+Route::post('/file','FileUpController@store');
+
+Route::resource('users','UsersController',['only'=>['index','create','store']]);
