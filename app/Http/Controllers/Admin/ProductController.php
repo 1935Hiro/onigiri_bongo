@@ -49,6 +49,11 @@ class ProductController extends Controller
         return view('admin.product.index',['posts' => $posts,'cond_title' =>$cond_title]);
     }
     
+    public function order()
+    {
+    return $this->hasManyThrough('admin/details');
+    }
+    
     
     public function edit(Request $request)
     {

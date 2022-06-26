@@ -2,57 +2,45 @@
 
 @section('content')
     <div class="container">
-        @if (!is_null($headline))
-            <div class="row">
-                <div class="posts col-md-8 mx-auto mt-3">
-                    <div class="row">
-                        <div class="text col-md-6">
-                            <div class="caption mx-auto">
-                                <div class="title p-2">
-                                    <p class="body mx-auto">{{ \Str::limit($headline->product_name, 100) }}</p>
-                                </div>
-                                <div class="image">
-                                    @if ($headline->image_path)
-                                        <img src="{{ asset('storage/image/' . $headline->image_path) }}">
-                                    @endif
-                                </div>
-                            </div>
+    @php 
+        $count=1
+    @endphp
+    
+    @foreach($posts as $post)
+        @if ($count==1)
+            <div class="row justify-content-center row-cols-1 row-cols-md-3 g-3">
+        @endif
+        <div class="col">
+            <div class="card  h-80">
+                    <div class="card-img-top">
+                        @if ($post->image_path)
+                            <img src="{{ asset('storage/image/' . $post->image_path) }}">
+                        @endif
+                    </div> 
+                    
+                    <div class="card-body">
+                        <div class="card-title">
+                            <p class="body mx-auto">{{ \Str::limit($post->product_name, 100) }}</p>
                         </div>
-                        <div class="col-md-6">
-                            <p class="body mx-auto">{{ \Str::limit($headline->price, 100) }}</p>
-                        </div>
+                    
+                        <p class="card-text">{{ \Str::limit($post->price, 100) }}</p>
+                    
+                        <a class="btn btn-primary">注文</a>
                     </div>
-                </div>
+            </div>
+        </div>
+        @php
+            $count +=1
+        @endphp
+        
+        @if ($count>3)
+            @php
+                $count=1
+            @endphp
             </div>
         @endif
         
-        <hr>
-
-        <div class="row">
-            <div class="posts col-md-8 mx-auto mt-3">
-                @foreach($posts as $post)
-                    <div class="post">
-                        <div class="row">
-                            <div class="text col-md-6">
-                                <div class="title">
-                                    {{ \Str::limit($post->product_name, 100) }}
-                                </div>
-                                <div class="body mt-3">
-                                    {{ \Str::limit($post->price, 100) }}
-                                </div>
-                            </div>
-                            <div class="image col-md-6 text-right mt-4">
-                                @if ($post->image_path)
-                                    <img src="{{ asset('storage/image/' . $post->image_path) }}">
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        
-        <hr>
-        
+    @endforeach  
+    
     </div>
 @endsection

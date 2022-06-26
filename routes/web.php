@@ -14,14 +14,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::get('/mypage', 'HomeController@mypage')->name('mypage');
-//     Route::get('/order', 'HomeController@order')->name('order');
-//     Route::get('/details', 'HomeController@details')->name('details');
-//     Route::get('/history', 'HomeController@history')->name('history');
-//     Route::get('/subsc', 'HomeController@subsc')->name('subsc');
-// });
-
 Route::group(['prefix' => 'admin'], function() {
     Route::get('product/create','Admin\ProductController@add')->middleware('auth');
     Route::post('product/create','Admin\ProductController@create')->middleware('auth');
