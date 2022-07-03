@@ -2,14 +2,9 @@
 
 @section('content')
     <div class="container">
-    @php 
-        $count=1
-    @endphp
-    
-    @foreach($posts as $post)
-        @if ($count==1)
-            <div class="row justify-content-center row-cols-1 row-cols-md-3 g-3">
-        @endif
+        
+@foreach($posts as $post)
+        <div class="row justify-content-center row-cols-1 row-cols-md-3 g-3">
         <div class="col">
             <div class="card  h-80">
                     <div class="card-img-top">
@@ -19,31 +14,22 @@
                     </div> 
                     
                     <div class="card-body">
-                        <div class="card-title">
+                        <div class="col-md-4 col-form-label">
                             <p class="body mx-auto">{{ \Str::limit($post->product_name, 100) }}</p>
                         </div>
-                    
+                        
                         <p class="card-text">{{ \Str::limit($post->price, 100) }}</p>
                         
-                        <form action="{{action('Admin\OrderController@index')}}">
-                             <input type="submit" class="btn btn-primary" value="注文">
-                             @csrf
-                        </from>
+                        <p class="card-text">{{ \Str::limit($post->option, 100) }}</p>
+                        
+                        <p class="card-text">{{ \Str::limit($post->order, 100) }}</p>
+                        
+                        <a class="btn btn-primary">購入</a>
                     </div>
             </div>
         </div>
-        @php
-            $count +=1
-        @endphp
-        
-        @if ($count>3)
-            @php
-                $count=1
-            @endphp
-            </div>
-        @endif
-        
     @endforeach  
+
     
     </div>
 @endsection

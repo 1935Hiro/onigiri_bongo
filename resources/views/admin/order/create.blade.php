@@ -5,8 +5,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>商品テーブル</h2>
-                <form action="{{ action('Admin\ProductController@create') }}" method="post" enctype="multipart/form-data">
+                <h2>注文テーブル</h2>
+                <form action="{{ action('Admin\OrderController@create') }}" method="post" enctype="multipart/form-data">
 
 
                     @if (count($errors) > 0)
@@ -18,23 +18,30 @@
                     @endif
                     
                     <div class="form-group row">
-                        <label class="col-md-2" for="product_name">商品名</label>
+                        <label class="col-md-2" for="reserve">予約日時</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="product_name" value="{{ old('product_name') }}">
+                            <input type="text" class="form-control" name="reserve" value="{{ old('reserve') }}">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label class="col-md-2" for="price">値段</label>
+                        <label class="col-md-2" for="price_total">合計金額</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="price" rows="20" value="{{ old('price') }}">
+                            <input type="text" class="form-control" name="price_total" rows="20" value="{{ old('price_total') }}">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label class="col-md-2" for="category">カテゴリー</label>
+                        <label class="col-md-2" for="recipient_name">受け取り名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="category" rows="20" value="{{ old('category') }}">
+                            <input type="text" class="form-control" name="recipient_name" rows="20" value="{{ old('recipient_name') }}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-2" for="token">トークン</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="token" rows="20" value="{{ old('token') }}">
                         </div>
                     </div>
                     

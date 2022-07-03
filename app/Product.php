@@ -14,8 +14,8 @@ class product extends Model
         'category' => 'required',
     );
     
-    public function histories()
+    public function orders_details()
     {
-        return $this->hasMany('App\History');
+        return $this->hasMany(Order_details::class);
     }
 }

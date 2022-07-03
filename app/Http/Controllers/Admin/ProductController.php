@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\History;
 use Carbon\Carbon;
+use App\Order_detail;
 
 class ProductController extends Controller
 {
@@ -48,12 +49,6 @@ class ProductController extends Controller
         
         return view('admin.product.index',['posts' => $posts,'cond_title' =>$cond_title]);
     }
-    
-    public function order()
-    {
-    return $this->hasManyThrough('admin/details');
-    }
-    
     
     public function edit(Request $request)
     {

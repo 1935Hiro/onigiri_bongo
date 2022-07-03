@@ -3,14 +3,14 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h2>商品テーブル一覧</h2>
+            <h2>注文テーブル一覧</h2>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <a href="{{ action('Admin\ProductController@add') }}" role="button" class="btn btn-primary">新規作成</a>
+                <a href="{{ action('Admin\OrderController@add') }}" role="button" class="btn btn-primary">新規作成</a>
             </div>
             <div class="col-md-8">
-                <form action="{{ action('Admin\ProductController@index') }}" method="get">
+                <form action="{{ action('Admin\OrderController@index') }}" method="get">
                     <div class="form-group row">
                         <label class="col-md-2">絞り込み検索</label>
                         <div class="col-md-8">
@@ -30,27 +30,27 @@
                         <table class="table table-white">
                         <thead>
                             <tr>
-                                <th width="20%">ID</th>
-                                <th width="20%">商品</th>
-                                <th width="20%">値段</th>
-                                <th width="20%">カテゴリー</th>
+                                <th width="20%">顧客ID</th>
+                                <th width="20%">予約日時</th>
+                                <th width="20%">合計金額</th>
+                                <th width="20%">受け取り名</th>
                                 <th width="10%">操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($posts as $product)
+                            @foreach($posts as $order)
                                 <tr>
-                                    <th>{{ $product->id }}</th>
-                                    <td>{{ \Str::limit($product->product_name) }}</td>
-                                    <td>{{ \Str::limit($product->price) }}</td>
-                                    <td>{{ \Str::limit($product->category) }}</td>
+                                    <th>{{ $order->user_id }}</th>
+                                    <td>{{ \Str::limit($order->reserve) }}</td>
+                                    <td>{{ \Str::limit($order->price_total) }}</td>
+                                    <td>{{ \Str::limit($order->recipient_name) }}</td>
                                     <td>
                                         <div>
-                                            <a href="{{ action('Admin\ProductController@edit', ['id' => $product->id]) }}">編集</a>
+                                            <a href="{{ action('Admin\OrderController@edit', ['id' => $order->id]) }}">編集</a>
                                         </div>
                                         
                                         <div>
-                                            <a href="{{ action('Admin\ProductController@delete', ['id' => $product->id]) }}">削除</a>
+                                            <a href="{{ action('Admin\OrderController@delete', ['id' => $order->id]) }}">削除</a>
                                         </div>
                                     </td>
                                 </tr>

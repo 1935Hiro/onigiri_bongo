@@ -13,13 +13,14 @@ class CreateOrderTable extends Migration
      */
     public function up()
     {
-        Schema::create('order', function (Blueprint $table) {
-            $table->bigIncrements('user_id');
+        Schema::create('orders', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('order_detail_id');
             $table->integer('price_total');
-            $table->integer('unix_timestamp');
             $table->string('recipient_name');
             $table->integer('token');
-            $table->string('image_path')->nullable();
+            $table->string('option');
+            $table->dateTime('reserve');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });
@@ -32,6 +33,6 @@ class CreateOrderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order');
+        Schema::dropIfExists('orders');
     }
 }

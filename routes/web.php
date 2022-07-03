@@ -21,6 +21,13 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('product/edit','Admin\ProductController@edit')->middleware('auth');
     Route::post('product/edit','Admin\ProductController@update')->middleware('auth');
     Route::get('product/delete','Admin\ProductController@delete')->middleware('auth');
+    
+    Route::get('order_detail/create','Admin\Order_detailController@add')->middleware('auth');
+    Route::post('order_detail/create','Admin\Order_detailController@create')->middleware('auth');
+    Route::get('order_detail','Admin\Order_detailController@index')->middleware('auth');
+    Route::get('order_detail/edit','Admin\Order_detailController@edit')->middleware('auth');
+    Route::post('order_detail/edit','Admin\Order_detailController@update')->middleware('auth');
+    Route::get('order_detail/delete','Admin\Order_detailController@delete')->middleware('auth');
 });
 
 Auth::routes();

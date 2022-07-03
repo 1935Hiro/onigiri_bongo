@@ -5,8 +5,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>商品テーブル</h2>
-                <form action="{{ action('Admin\ProductController@update') }}" method="post" enctype="multipart/form-data">
+                <h2>注文テーブル</h2>
+                <form action="{{ action('Admin\OrderController@update') }}" method="post" enctype="multipart/form-data">
                     @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
@@ -15,23 +15,30 @@
                         </ul>
                     @endif
                     <div class="form-group row">
-                        <label class="col-md-2" for="product_name">商品名</label>
+                        <label class="col-md-2" for="reserve">予約日時名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="product_name" value="{{ $product_form->product_name }}">
+                            <input type="text" class="form-control" name="reserve" value="{{ $order_form->reserve }}">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label class="col-md-2" for="price">値段</label>
+                        <label class="col-md-2" for="price_total">合計金額</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="price" rows="20" value="{{ $product_form->price }}">
+                            <input type="text" class="form-control" name="price_total" rows="20" value="{{ $order_form->price_total }}">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label class="col-md-2" for="category">カテゴリー</label>
+                        <label class="col-md-2" for="recipient_name">受け取り名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="category" rows="20" value="{{ $product_form->category }}">
+                            <input type="text" class="form-control" name="recipient_name" rows="20" value="{{ $order_form->recipient_name }}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-2" for="token">トークン</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="token" rows="20" value="{{ $order_form->token }}">
                         </div>
                     </div>
                     
@@ -40,7 +47,7 @@
                         <div class="col-md-10">
                             <input type="file" class="form-control-file" name="image">
                             <div class="form-text text-info">
-                                設定中: {{ $product_form->image_path }}
+                                設定中: {{ $order_form->image_path }}
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
@@ -52,25 +59,12 @@
                     
                     <div class="form-group row">
                         <div class="col-md-10">
-                            <input type="hidden" name="id" value="{{ $product_form->id }}">
+                            <input type="hidden" name="id" value="{{ $order_form->id }}">
                             @csrf
                             <input type="submit" class="btn btn-primary" value="更新">
                         </div>
                     </div>
                 </form>
-                
-                <div class="row mt-5">
-                    <div class="col-md-4 mx-auto">
-                        <h5>編集履歴</h5>
-                        <ul class="list-group">
-                            @if ($product_form->histories != NULL)
-                                @foreach ($product_form->histories as $history)
-                                    <li class="list-group-item">{{ $history->edited_at }}</li>
-                                @endforeach
-                            @endif
-                        </ul>
-                    </div>
-                </div>
                 
             </div>
         </div>
