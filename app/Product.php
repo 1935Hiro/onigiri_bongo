@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class product extends Model
+class Product extends Model
 {
     protected $guarded = array('id');
 
@@ -14,8 +14,8 @@ class product extends Model
         'category' => 'required',
     );
     
-    public function orders_details()
+    public function orders()
     {
-        return $this->hasMany(Order_details::class);
+        return $this->hasMany('App\Order');
     }
 }

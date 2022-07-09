@@ -6,66 +6,26 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>注文テーブル</h2>
-                <form action="{{ action('Admin\OrderController@update') }}" method="post" enctype="multipart/form-data">
-                    @if (count($errors) > 0)
-                        <ul>
-                            @foreach($errors->all() as $e)
-                                <li>{{ $e }}</li>
-                            @endforeach
-                        </ul>
+                <p><a href="{{ route('order.index')}}">一覧画面</a></p>
+ 
+                    @if ($message = Session::get('success'))
+                    <p>{{ $message }}</p>
                     @endif
-                    <div class="form-group row">
-                        <label class="col-md-2" for="reserve">予約日時名</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="reserve" value="{{ $order_form->reserve }}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label class="col-md-2" for="price_total">合計金額</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="price_total" rows="20" value="{{ $order_form->price_total }}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label class="col-md-2" for="recipient_name">受け取り名</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="recipient_name" rows="20" value="{{ $order_form->recipient_name }}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label class="col-md-2" for="token">トークン</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="token" rows="20" value="{{ $order_form->token }}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label class="col-md-2" for="image">画像</label>
-                        <div class="col-md-10">
-                            <input type="file" class="form-control-file" name="image">
-                            <div class="form-text text-info">
-                                設定中: {{ $order_form->image_path }}
-                            </div>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="remove" value="true">画像を削除
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <div class="col-md-10">
-                            <input type="hidden" name="id" value="{{ $order_form->id }}">
-                            @csrf
-                            <input type="submit" class="btn btn-primary" value="更新">
-                        </div>
-                    </div>
-                </form>
-                
+                     
+                    <form action="{{ route('order.update',$order->id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <p>商品名<input type="text" name="product_name" value="{{ $member->product_name }}"></p>
+                        <p>値段<input type="number" name="price" value="{{ $member->price_total}}"></p>
+                        <p>
+                            <select name="product_id">
+                                @foreach($products as $product)
+                                <option value="{{ $product->id }}" @if($product->id === $order->product_id) selected='selected' @endif>{{ $product->name }}</option>
+                                @endforeach
+                            </select>
+                        </p>
+                        <input type="submit" value="編集する">
+                    </form>
             </div>
         </div>
     </div>

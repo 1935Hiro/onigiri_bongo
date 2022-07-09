@@ -17,19 +17,17 @@
                             <img src="{{ asset('storage/image/' . $post->image_path) }}">
                         @endif
                     </div> 
-                    
+                <form action="{{ action('Admin\OrderController@create') }}" method="post">
+                    @csrf
                     <div class="card-body">
                         <div class="card-title">
                             <p class="body mx-auto">{{ \Str::limit($post->product_name, 100) }}</p>
                         </div>
                     
                         <p class="card-text">{{ \Str::limit($post->price, 100) }}</p>
-                        
-                        <form action="{{action('Admin\OrderController@index')}}">
-                             <input type="submit" class="btn btn-primary" value="注文">
-                             @csrf
-                        </from>
+                            <input type="submit" class="btn btn-primary" value="注文">
                     </div>
+                </from>
             </div>
         </div>
         @php

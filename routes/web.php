@@ -14,20 +14,22 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::group(['prefix' => 'admin'], function() {
-    Route::get('product/create','Admin\ProductController@add')->middleware('auth');
-    Route::post('product/create','Admin\ProductController@create')->middleware('auth');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+    Route::get('product/create','Admin\ProductController@add');
+    Route::post('product/create','Admin\ProductController@create');
     Route::get('product','Admin\ProductController@index')->middleware('auth');
     Route::get('product/edit','Admin\ProductController@edit')->middleware('auth');
     Route::post('product/edit','Admin\ProductController@update')->middleware('auth');
     Route::get('product/delete','Admin\ProductController@delete')->middleware('auth');
     
-    Route::get('order_detail/create','Admin\Order_detailController@add')->middleware('auth');
-    Route::post('order_detail/create','Admin\Order_detailController@create')->middleware('auth');
-    Route::get('order_detail','Admin\Order_detailController@index')->middleware('auth');
-    Route::get('order_detail/edit','Admin\Order_detailController@edit')->middleware('auth');
-    Route::post('order_detail/edit','Admin\Order_detailController@update')->middleware('auth');
-    Route::get('order_detail/delete','Admin\Order_detailController@delete')->middleware('auth');
+    Route::resource('/order', 'OrderController');
+    
+    Route::get('order/create','Admin\OrderController@add');
+    Route::post('order/create','Admin\OrderController@create');
+    Route::get('order','Admin\OrderController@index')->middleware('auth');
+    Route::get('order/edit','Admin\OrderController@edit')->middleware('auth');
+    Route::post('order/edit','Admin\OrderController@update')->middleware('auth');
+    Route::get('order/delete','Admin\OrderController@delete')->middleware('auth');
 });
 
 Auth::routes();

@@ -5,54 +5,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>注文テーブル</h2>
-                <form action="{{ action('Admin\OrderController@create') }}" method="post" enctype="multipart/form-data">
-
-
-                    @if (count($errors) > 0)
-                        <ul>
-                            @foreach($errors->all() as $e)
-                                <li>{{ $e }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
-                    
-                    <div class="form-group row">
-                        <label class="col-md-2" for="reserve">予約日時</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="reserve" value="{{ old('reserve') }}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label class="col-md-2" for="price_total">合計金額</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="price_total" rows="20" value="{{ old('price_total') }}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label class="col-md-2" for="recipient_name">受け取り名</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="recipient_name" rows="20" value="{{ old('recipient_name') }}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label class="col-md-2" for="token">トークン</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="token" rows="20" value="{{ old('token') }}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label class="col-md-2" for="image">画像</label>
-                        <div class="col-md-10">
-                            <input type="file" class="form-control-file" name="image">
-                        </div>
-                    </div>
+                <h2>注文画面</h2>
+                <p><a href="{{ route('order.index')}}">一覧画面</a></p>
+                 
+                <form action="{{ route('order.store')}}" method="POST">
                     @csrf
-                    <input type="submit" class="btn btn-primary" value="更新">
+                    <p>商品名<input type="text" name="product_name" value="{{ old('product_name') }}"></p>
+                    <p>値段<input type="number" name="price_total" value="{{ old('price_total') }}"></p>
+                    <p>
+                        <select name="product_id">
+                            @foreach($products as $product)
+                            <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                            @endforeach
+                        </select>
+                    </p>
+                    <input type="submit" value="登録する">
                 </form>
             </div>
         </div>

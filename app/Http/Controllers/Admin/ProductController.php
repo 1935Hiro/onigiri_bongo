@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\History;
 use Carbon\Carbon;
-use App\Order_detail;
+use App\Order;
 
 class ProductController extends Controller
 {
@@ -50,18 +50,31 @@ class ProductController extends Controller
         return view('admin.product.index',['posts' => $posts,'cond_title' =>$cond_title]);
     }
     
-    public function edit(Request $request)
+    public function store(Request $request)
+    {
+        $product = $request->all();
+
+        $product_id = Order::insertGetId([
+             'product_id' => $product['product_id'], 
+             'status' => 1
+        ]);
+
+        return redirect()->route('order');
+    }
+    
+    public function edit(Request $request,$product_id)
     {
         $product = Product::find($request->id);
         
         if(empty($product)){
             abort(404); 
         }
+
         return view('admin.product.edit',['product_form'=>$product]);
     }
     
     
-    public function update(Request $request)
+    public function update(Request $request,$product_id)
     {
         $this -> validate($request,Product::$rules);
         $product = Product::find($request->id);
@@ -90,7 +103,7 @@ class ProductController extends Controller
     }
     
     
-    public function delete(Request $request)
+    public function delete(Request $request,$product_id)
     {
         $product = Product::find($request->id);
         $product -> delete();

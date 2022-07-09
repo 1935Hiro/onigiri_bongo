@@ -30,7 +30,6 @@
                         <table class="table table-white">
                         <thead>
                             <tr>
-                                <th width="20%">ID</th>
                                 <th width="20%">商品</th>
                                 <th width="20%">値段</th>
                                 <th width="20%">カテゴリー</th>

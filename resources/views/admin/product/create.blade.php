@@ -7,7 +7,7 @@
             <div class="col-md-8 mx-auto">
                 <h2>商品テーブル</h2>
                 <form action="{{ action('Admin\ProductController@create') }}" method="post" enctype="multipart/form-data">
-
+                    @csrf
 
                     @if (count($errors) > 0)
                         <ul>

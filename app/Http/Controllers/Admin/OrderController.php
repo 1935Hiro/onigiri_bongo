@@ -18,7 +18,7 @@ class OrderController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, Order::$rules);
-        $product = new Order();
+        $order = new Order();
         $form = $request->all();
     
         if (isset($form['image'])) {
@@ -42,17 +42,17 @@ class OrderController extends Controller
     {
         $cond_title = $request->cond_title;
         if($cond_title !=''){
-            $posts = Order::where('user_id',$cond_title)->get();
+            $posts = Order::where('product_id',$cond_title)->get();
         }else{
             $posts = Order::all();
         }
         
-        return view('admin.order.index',['posts' => $posts,'cond_title' =>$cond_title]);
+        return view('admin.product.index',['posts' => $posts,'cond_title' =>$cond_title]);
     }
     
     public function edit(Request $request)
     {
-        $product = Order::find($request->id);
+        $order = Product::find($request->id);
         
         if(empty($order)){
             abort(404); 

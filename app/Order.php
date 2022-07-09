@@ -9,13 +9,12 @@ class Order extends Model
     protected $guarded = array('id');
 
     public static $rules = array(
-        'recipient_name' => 'required',
-        'reserve' => 'required',
+        'product_id' => 'required',
+        'product_name' => 'required',
         'price_total' => 'required',
     );
    
-    public function orders_detail(){
-       return $this->belongsTo(Orders_detail::class);
+    public function product(){
+       return $this->belongsTo('App\Product');
    }
-    
 }
